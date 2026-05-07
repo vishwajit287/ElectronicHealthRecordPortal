@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+﻿import { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { Upload } from 'lucide-react';
 
@@ -12,15 +12,21 @@ const UploadReports = () => {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   return (
-    <div>
-      <h2 className="text-xl font-bold mb-4">Upload Reports</h2>
-      <div {...getRootProps()} className="border-2 border-dashed border-gray-300 p-8 text-center cursor-pointer hover:border-gray-400">
+    <div className="space-y-6">
+      <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+        <div>
+          <h2 className="text-2xl font-bold">Upload Reports</h2>
+          <p className="text-sm text-slate-600">Upload your documents here and attach them to the patient record.</p>
+        </div>
+      </div>
+
+      <div {...getRootProps()} className="rounded-2xl border border-slate-200 bg-slate-50 p-8 text-center transition hover:border-slate-300 hover:bg-slate-100 cursor-pointer">
         <input {...getInputProps()} />
-        <Upload className="mx-auto mb-4" size={48} />
+        <Upload className="mx-auto mb-4 text-slate-600" size={48} />
         {isDragActive ? (
-          <p>Drop the files here...</p>
+          <p className="text-slate-700">Drop the files here...</p>
         ) : (
-          <p>Drag 'n' drop some files here, or click to select files</p>
+          <p className="text-slate-700">Drag & drop files here, or click to select files</p>
         )}
       </div>
     </div>
