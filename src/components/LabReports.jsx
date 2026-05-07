@@ -1,7 +1,9 @@
 ﻿import { useState } from 'react';
 import { Download } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const LabReports = () => {
+  const { t } = useTranslation();
   const [search, setSearch] = useState('');
 
   const mockData = [
@@ -28,12 +30,12 @@ const LabReports = () => {
     <div className="space-y-6">
       <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
         <div>
-          <h2 className="text-2xl font-bold">Lab Reports</h2>
-          <p className="text-sm text-slate-600">Search past lab reports and download report files.</p>
+          <h2 className="text-2xl font-bold">{t('labReports')}</h2>
+          <p className="text-sm text-slate-600">{t('searchLabReports')}</p>
         </div>
         <input
           type="text"
-          placeholder="Search lab reports..."
+          placeholder={t('searchLabReports')}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="w-full max-w-md rounded border border-slate-300 bg-white px-3 py-2 text-sm shadow-sm outline-none transition focus:border-slate-400 focus:ring-2 focus:ring-slate-200"
@@ -59,7 +61,7 @@ const LabReports = () => {
                 <td className="px-4 py-3 text-sm text-slate-700">
                   <button onClick={() => handleDownload(item.file)} className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800">
                     <Download size={16} />
-                    <span>Download</span>
+                    <span>{t('download')}</span>
                   </button>
                 </td>
               </tr>

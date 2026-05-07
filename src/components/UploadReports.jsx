@@ -1,13 +1,15 @@
 ﻿import { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { Upload } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const UploadReports = () => {
+  const { t } = useTranslation();
   const onDrop = useCallback((acceptedFiles) => {
     // Mock upload
     console.log('Files uploaded:', acceptedFiles);
-    alert('Files uploaded successfully!');
-  }, []);
+    alert(t('filesUploaded'));
+  }, [t]);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
@@ -15,8 +17,8 @@ const UploadReports = () => {
     <div className="space-y-6">
       <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
         <div>
-          <h2 className="text-2xl font-bold">Upload Reports</h2>
-          <p className="text-sm text-slate-600">Upload your documents here and attach them to the patient record.</p>
+          <h2 className="text-2xl font-bold">{t('uploadReports')}</h2>
+          <p className="text-sm text-slate-600">{t('uploadDescription')}</p>
         </div>
       </div>
 
@@ -24,9 +26,9 @@ const UploadReports = () => {
         <input {...getInputProps()} />
         <Upload className="mx-auto mb-4 text-slate-600" size={48} />
         {isDragActive ? (
-          <p className="text-slate-700">Drop the files here...</p>
+          <p className="text-slate-700">{t('dropFiles')}</p>
         ) : (
-          <p className="text-slate-700">Drag & drop files here, or click to select files</p>
+          <p className="text-slate-700">{t('dragDropFiles')}</p>
         )}
       </div>
     </div>

@@ -1,7 +1,9 @@
 ﻿import { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const PatientHistory = () => {
+  const { t } = useTranslation();
   const [search, setSearch] = useState('');
   const [typeFilter, setTypeFilter] = useState('all');
   const [yearMonthFilter, setYearMonthFilter] = useState('all');
@@ -132,36 +134,36 @@ const PatientHistory = () => {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-2xl font-bold">Patient Medical Timeline</h2>
-        <p className="text-sm text-slate-600 mt-1">View complete medical history with visits, prescriptions, surgeries, lab reports, and doctor notes.</p>
+        <h2 className="text-2xl font-bold">{t('patientMedicalTimeline')}</h2>
+        <p className="text-sm text-slate-600 mt-1">{t('timelineDescription')}</p>
       </div>
 
       {/* Filters */}
       <div className="flex flex-col gap-3 md:flex-row md:items-end md:gap-4">
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">Record Type</label>
+          <label className="block text-sm font-medium text-slate-700 mb-1">{t('recordType')}</label>
           <select
             value={typeFilter}
             onChange={(e) => setTypeFilter(e.target.value)}
             className="rounded border border-slate-300 bg-white px-3 py-2 text-sm shadow-sm outline-none transition focus:border-slate-400 focus:ring-2 focus:ring-slate-200"
           >
-            <option value="all">All Types</option>
-            <option value="consultation">Consultation</option>
-            <option value="lab test">Lab Test</option>
-            <option value="prescription">Prescription</option>
-            <option value="surgery">Surgery</option>
-            <option value="doctor notes">Doctor Notes</option>
+            <option value="all">{t('allTypes')}</option>
+            <option value="consultation">{t('consultation')}</option>
+            <option value="lab test">{t('labTest')}</option>
+            <option value="prescription">{t('prescription')}</option>
+            <option value="surgery">{t('surgery')}</option>
+            <option value="doctor notes">{t('doctorNotes')}</option>
           </select>
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">Year / Month</label>
+          <label className="block text-sm font-medium text-slate-700 mb-1">{t('yearMonth')}</label>
           <select
             value={yearMonthFilter}
             onChange={(e) => setYearMonthFilter(e.target.value)}
             className="rounded border border-slate-300 bg-white px-3 py-2 text-sm shadow-sm outline-none transition focus:border-slate-400 focus:ring-2 focus:ring-slate-200"
           >
-            <option value="all">All Dates</option>
+            <option value="all">{t('allDates')}</option>
             {uniqueYearMonths.map((ym) => (
               <option key={ym} value={ym}>
                 {ym}
@@ -171,10 +173,10 @@ const PatientHistory = () => {
         </div>
 
         <div className="flex-1">
-          <label className="block text-sm font-medium text-slate-700 mb-1">Search</label>
+          <label className="block text-sm font-medium text-slate-700 mb-1">{t('search')}</label>
           <input
             type="text"
-            placeholder="Search timeline..."
+            placeholder={t('searchTimeline')}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             className="w-96 rounded border border-slate-300 bg-white px-3 py-2 text-sm shadow-sm outline-none transition focus:border-slate-400 focus:ring-2 focus:ring-slate-200"
@@ -187,7 +189,7 @@ const PatientHistory = () => {
         <div className="overflow-y-auto flex-1 pr-2">
           {sortedRecords.length === 0 ? (
             <div className="flex items-center justify-center h-full">
-              <p className="text-slate-500">No records match your filters. Try adjusting your search criteria.</p>
+              <p className="text-slate-500">{t('noRecords')}</p>
             </div>
           ) : (
             <div className="space-y-3">
@@ -232,7 +234,7 @@ const PatientHistory = () => {
                   {expandedId === record.id && (
                     <div className="border-t border-slate-200 bg-slate-50 p-4">
                       <div className="bg-white rounded p-3 border border-slate-100">
-                        <h4 className="font-semibold text-sm text-slate-900 mb-2">Detailed Information</h4>
+                        <h4 className="font-semibold text-sm text-slate-900 mb-2">{t('detailedInformation')}</h4>
                         <p className="text-sm text-slate-700 leading-relaxed">{record.details}</p>
                       </div>
                     </div>
@@ -247,23 +249,23 @@ const PatientHistory = () => {
         <div className="border-t border-slate-200 pt-4 mt-2">
           <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
             <div className="rounded border border-slate-200 bg-slate-50 p-2 text-center">
-              <p className="text-xs text-slate-600">Total</p>
+              <p className="text-xs text-slate-600">{t('totalRecords')}</p>
               <p className="text-base font-bold text-slate-900">{allRecords.length}</p>
             </div>
             <div className="rounded border border-slate-200 bg-slate-50 p-2 text-center">
-              <p className="text-xs text-slate-600">Consultations</p>
+              <p className="text-xs text-slate-600">{t('consultations')}</p>
               <p className="text-base font-bold text-slate-900">{allRecords.filter((r) => r.type === 'Consultation').length}</p>
             </div>
             <div className="rounded border border-slate-200 bg-slate-50 p-2 text-center">
-              <p className="text-xs text-slate-600">Lab Tests</p>
+              <p className="text-xs text-slate-600">{t('labTests')}</p>
               <p className="text-base font-bold text-slate-900">{allRecords.filter((r) => r.type === 'Lab Test').length}</p>
             </div>
             <div className="rounded border border-slate-200 bg-slate-50 p-2 text-center">
-              <p className="text-xs text-slate-600">Prescriptions</p>
+              <p className="text-xs text-slate-600">{t('prescriptions')}</p>
               <p className="text-base font-bold text-slate-900">{allRecords.filter((r) => r.type === 'Prescription').length}</p>
             </div>
             <div className="rounded border border-slate-200 bg-slate-50 p-2 text-center">
-              <p className="text-xs text-slate-600">Surgeries</p>
+              <p className="text-xs text-slate-600">{t('surgeries')}</p>
               <p className="text-base font-bold text-slate-900">{allRecords.filter((r) => r.type === 'Surgery').length}</p>
             </div>
           </div>

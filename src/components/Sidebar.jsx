@@ -1,18 +1,20 @@
 ﻿import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Home, History, Upload, FileText, Pill, Download, ChevronLeft, ChevronRight } from 'lucide-react';
-
-const navItems = [
-  { to: '/', label: 'Dashboard', icon: Home },
-  { to: '/patient-history', label: 'Patient History', icon: History },
-  { to: '/upload-reports', label: 'Upload Reports', icon: Upload },
-  { to: '/lab-reports', label: 'Lab Reports', icon: FileText },
-  { to: '/prescriptions', label: 'Prescriptions', icon: Pill },
-  { to: '/downloads', label: 'Downloads', icon: Download },
-];
+import { useTranslation } from 'react-i18next';
 
 const Sidebar = () => {
+  const { t } = useTranslation();
   const [collapsed, setCollapsed] = useState(false);
+
+  const navItems = [
+    { to: '/', label: t('dashboard'), icon: Home },
+    { to: '/patient-history', label: t('patientHistory'), icon: History },
+    { to: '/upload-reports', label: t('uploadReports'), icon: Upload },
+    { to: '/lab-reports', label: t('labReports'), icon: FileText },
+    { to: '/prescriptions', label: t('prescriptions'), icon: Pill },
+    { to: '/downloads', label: t('downloads'), icon: Download },
+  ];
 
   return (
     <div className={`h-full transition-all duration-300 ${collapsed ? 'w-20' : 'w-64'} bg-slate-100 text-slate-900 border-r border-slate-200 shadow-sm`}>
@@ -25,7 +27,7 @@ const Sidebar = () => {
           type="button"
           onClick={() => setCollapsed(!collapsed)}
           className="rounded-full p-2 text-slate-600 hover:bg-slate-200 focus:outline-none focus:ring-2 focus:ring-slate-300"
-          aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+          aria-label={collapsed ? t('expandSidebar') : t('collapseSidebar')}
         >
           {collapsed ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}
         </button>
